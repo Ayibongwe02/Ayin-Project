@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayin Studio — Custom software for professional teams</title>
+  <meta name="description" content="Ayin Studio builds the tools professional teams actually need — custom software, ML systems, and digital products from a blank page. Something from nothing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: {
+              950: '#050505',
+              900: '#0a0a0b',
+              800: '#121214',
+              700: '#1c1c1f',
+              600: '#2a2a2e',
+            },
+            sand: {
+              50: '#faf8f5',
+              100: '#f3efe8',
+              200: '#e8e0d4',
+              300: '#d4c4b0',
+            },
+            accent: {
+              DEFAULT: '#c9a87c',
+              soft: '#d4b896',
+              muted: '#a68b5b',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-ink-950 text-sand-50 font-sans antialiased overflow-x-hidden">
+  <!-- Noise overlay for premium texture -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Floating software doodles -->
+  <div class="doodle-field" id="doodleField" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="nav">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="logo-mark w-9 h-9 relative">
+          <svg viewBox="0 0 40 40" fill="none" class="w-full h-full">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.2" class="text-accent/60 group-hover:text-accent transition-colors"/>
+            <circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.2" class="text-accent"/>
+            <circle cx="20" cy="20" r="2.5" fill="currentColor" class="text-accent"/>
+            <path d="M20 2v4M20 34v4M2 20h4M34 20h4" stroke="currentColor" stroke-width="1" class="text-accent/40"/>
+          </svg>
+        </div>
+        <span class="font-medium tracking-tight text-lg">Ayin <span class="text-sand-200/70 font-normal">Studio</span></span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-sand-200/80">
+        <a href="#work" class="hover:text-sand-50 transition-colors">Work</a>
+        <a href="#about" class="hover:text-sand-50 transition-colors">About</a>
+        <a href="#process" class="hover:text-sand-50 transition-colors">Process</a>
+        <a href="#services" class="hover:text-sand-50 transition-colors">Services</a>
+        <a href="#contact" class="px-4 py-2 rounded-full bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20 transition-colors">Book a call</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden text-sand-100 p-2" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-ink-950/95 backdrop-blur-xl hidden flex-col items-center justify-center gap-8 text-xl">
+    <a href="#work" class="mobile-link">Work</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#process" class="mobile-link">Process</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#contact" class="mobile-link text-accent">Book a call</a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden">
+      <!-- Ambient glow -->
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+        <div class="relative z-10">
+          <p class="text-accent/90 text-sm tracking-[0.2em] uppercase mb-6 font-medium">Something from nothing</p>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6">
+            Custom software<br />
+            <span class="text-sand-200/90">for professional teams.</span>
+          </h1>
+          <p class="text-lg text-sand-200/70 max-w-lg leading-relaxed mb-10">
+            We build the tools your team actually needs — from a blank page. Focused systems, clear interfaces, and the quiet confidence that comes from software made to fit the way you work.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-ink-950 font-medium hover:bg-accent-soft transition-colors">
+              Book a free discovery call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#work" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-sand-200/20 text-sand-100 hover:border-sand-200/40 transition-colors">
+              See the work
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Logo Stage -->
+        <div class="relative flex justify-center lg:justify-end">
+          <div id="logoStage" class="logo-stage relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div class="logo-3d" id="logo3d">
+              <div class="logo-face logo-front">
+                <svg viewBox="0 0 200 200" class="w-full h-full" id="logoSvg">
+                  <circle id="ringOuter" cx="100" cy="100" r="88" fill="none" stroke="url(#grad1)" stroke-width="1.5" opacity="0.7"/>
+                  <circle id="ringMid" cx="100" cy="100" r="58" fill="none" stroke="url(#grad1)" stroke-width="1.2" opacity="0.9"/>
+                  <g id="logoEye" style="transform-box: fill-box; transform-origin: center;">
+                    <circle id="iris" cx="100" cy="100" r="18" fill="url(#grad2)" />
+                    <circle id="pupil" cx="100" cy="100" r="8" fill="#0a0a0b" />
+                    <circle id="pupilHighlight" cx="96" cy="96" r="2.2" fill="#faf8f5" opacity="0.35"/>
+                  </g>
+                  <g id="logoRays" stroke="url(#grad1)" stroke-width="0.8" opacity="0.4">
+                    <line x1="100" y1="12" x2="100" y2="28"/>
+                    <line x1="100" y1="172" x2="100" y2="188"/>
+                    <line x1="12" y1="100" x2="28" y2="100"/>
+                    <line x1="172" y1="100" x2="188" y2="100"/>
+                    <line x1="32" y1="32" x2="44" y2="44"/>
+                    <line x1="156" y1="156" x2="168" y2="168"/>
+                    <line x1="168" y1="32" x2="156" y2="44"/>
+                    <line x1="44" y1="156" x2="32" y2="168"/>
+                  </g>
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#c9a87c"/>
+                      <stop offset="100%" stop-color="#a68b5b"/>
+                    </linearGradient>
+                    <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#e8d5b5"/>
+                      <stop offset="100%" stop-color="#c9a87c"/>
+                    </radialGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <!-- Soft glow under logo -->
+            <div class="absolute inset-0 bg-accent/10 rounded-full blur-3xl scale-75 pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-sand-200/40 text-xs tracking-widest uppercase">
+        <span>Scroll</span>
+        <div class="w-px h-8 bg-gradient-to-b from-sand-200/40 to-transparent"></div>
+      </div>
+    </section>
+
+    <!-- WORK / PROJECTS -->
+    <section id="work" class="py-28 relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16 max-w-2xl">
+          <p class="text-accent text-sm tracking-[0.2em] uppercase mb-4">Selected work</p>
+          <h2 class="font-serif text-4xl sm:text-5xl tracking-tight mb-5">Tools built for real teams</h2>
+          <p class="text-sand-100/80 text-lg leading-relaxed">
+            Every project starts from a blank page. These are the systems currently live — each one designed to solve a specific, high-stakes problem for the people who use it every day.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <!-- Chance Signal Hub -->
+          <a href="https://c-signal.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">Retention · ML</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Chance Signal Hub</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                Live churn classifier for retention teams. Train on customer history, score any cohort, and surface who is about to leave — with clear risk bands and exportable insights. Nothing stored on a server.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Churn prediction</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Session-only</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Telco / SaaS</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Cyber Sentinel -->
+          <a href="https://cybersecurity-incident-threat.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">Security · Intelligence</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Cyber Sentinel</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                Threat-intelligence dashboard with live posture KPIs, anomaly detection, host traffic analysis, and hunting tools. Built for security teams who need signal, not noise.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Threat intel</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Anomaly detection</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">SOC tooling</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Anvil -->
+          <a href="https://an-forger.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">ML Ops · Collaboration</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Anvil</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                Train machine-learning models as a team and export them anywhere. A collaborative workspace designed for the messy, iterative reality of model development.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Team ML</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Model export</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Workflow</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Ledger -->
+          <a href="https://stokvel-app.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">Fintech · Forecasting</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Ledger</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                Stokvel bookkeeping without the spreadsheet headaches. Track contributions, member balances, and run a live Holt-Winters forecast so every group can see where the money is headed.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Savings groups</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Holt-Winters</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">South Africa</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Ma-yi Sentinel -->
+          <a href="https://ma-yi-pf1p.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">Trading · Real-time</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Ma-yi Sentinel</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                Live trading command desk with multi-timeframe analysis, signal triage, entry/stop/target calculation, and engine logs. Dense, fast, and built for decisions under pressure.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">FX / Indices</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Signal engine</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Live desk</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Code Community Museum -->
+          <a href="https://upma-prototype.onrender.com/" target="_blank" rel="noopener" class="project-card group reveal-item">
+            <div class="project-card-inner">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <span class="text-xs tracking-widest uppercase text-accent/80">Culture · Platform</span>
+                  <h3 class="text-2xl font-medium mt-2 group-hover:text-accent transition-colors">Code Community Museum</h3>
+                </div>
+                <span class="text-sand-200/40 group-hover:text-accent transition-colors">↗</span>
+              </div>
+              <p class="text-sand-100/75 leading-relaxed mb-6">
+                A living digital museum for community voices, collections, and local resources. Galleries, podcasts, and conversation spaces designed to keep cultural memory accessible and participatory.
+              </p>
+              <div class="flex flex-wrap gap-2 text-xs text-sand-200/50">
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Digital heritage</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Community</span>
+                <span class="px-2.5 py-1 rounded-full bg-ink-700">Collections</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-28 relative border-t border-ink-700/60">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-12 gap-16 items-start">
+          <div class="lg:col-span-5">
+            <p class="text-accent text-sm tracking-[0.2em] uppercase mb-4">About</p>
+            <h2 class="font-serif text-4xl sm:text-5xl tracking-tight leading-tight mb-8">
+              Built by someone who still sits with the blank page.
+            </h2>
+            <div class="space-y-5 text-sand-100/90 leading-relaxed text-lg">
+              <p>
+                Ayin Studio started from a simple frustration: the tools professional teams rely on are rarely built for the way those teams actually work. They are either too generic, too heavy, or designed by people who have never had to live with the consequences of a bad interface at 11 p.m.
+              </p>
+              <p>
+                Most of the time that means sitting with how a team already works — the systems they design around, the data they depend on, the questions research keeps surfacing — and building something that fits that reality, not a template of someone else’s.
+              </p>
+              <p>
+                Ayin is the Hebrew letter for “eye,” and in older traditions it also points to the fertile nothing from which something new can appear. That is the work: starting from zero, seeing clearly, and making the tool that was missing.
+              </p>
+            </div>
+          </div>
+          <div class="lg:col-span-6 lg:col-start-7">
+            <div class="bg-ink-800/50 border border-ink-600/40 rounded-2xl p-8 sm:p-10">
+              <h3 class="text-sm tracking-widest uppercase text-accent/80 mb-8">What I care about</h3>
+              <ul class="space-y-6">
+                <li class="flex gap-4">
+                  <span class="text-accent mt-1">01</span>
+                  <div>
+                    <p class="font-medium text-sand-50 mb-1">Tools that get used</p>
+                    <p class="text-sand-200/60 text-sm leading-relaxed">Software that sits unused is expensive theatre. I design for the daily workflow, not the pitch deck.</p>
+                  </div>
+                </li>
+                <li class="flex gap-4">
+                  <span class="text-accent mt-1">02</span>
+                  <div>
+                    <p class="font-medium text-sand-50 mb-1">Clarity over cleverness</p>
+                    <p class="text-sand-200/60 text-sm leading-relaxed">Complex problems deserve simple interfaces. The intelligence should live in the system, not in the user’s head.</p>
+                  </div>
+                </li>
+                <li class="flex gap-4">
+                  <span class="text-accent mt-1">03</span>
+                  <div>
+                    <p class="font-medium text-sand-50 mb-1">Starting from nothing</p>
+                    <p class="text-sand-200/60 text-sm leading-relaxed">Every engagement begins with a blank page and a real problem. No templates pretending to be custom.</p>
+                  </div>
+                </li>
+                <li class="flex gap-4">
+                  <span class="text-accent mt-1">04</span>
+                  <div>
+                    <p class="font-medium text-sand-50 mb-1">Stay close to the problem</p>
+                    <p class="text-sand-200/60 text-sm leading-relaxed">If it is hard to explain in plain language, the software is not ready yet. Clarity is part of the build.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="py-28 relative border-t border-ink-700/60">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16 max-w-2xl">
+          <p class="text-accent text-sm tracking-[0.2em] uppercase mb-4">How we work</p>
+          <h2 class="font-serif text-4xl sm:text-5xl tracking-tight mb-5">The discovery sprint</h2>
+          <p class="text-sand-100/80 text-lg leading-relaxed">
+            We usually begin with a short conversation and a shared map of the problem. The aim is not a long plan — it is a small first version the team can already use and react to.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="process-step reveal-item">
+            <span class="text-4xl font-serif text-accent/40 mb-4 block">01</span>
+            <h3 class="text-lg font-medium mb-2">Listen</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">A short call. No deck. We talk about the problem, what is getting in the way, and what would feel useful if it worked next month.</p>
+          </div>
+          <div class="process-step reveal-item">
+            <span class="text-4xl font-serif text-accent/40 mb-4 block">02</span>
+            <h3 class="text-lg font-medium mb-2">Map</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Together we sketch the workflows, the data, and the decisions that matter. Enough structure to build from — not a long requirements document.</p>
+          </div>
+          <div class="process-step reveal-item">
+            <span class="text-4xl font-serif text-accent/40 mb-4 block">03</span>
+            <h3 class="text-lg font-medium mb-2">Build the first cut</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">A working piece that already helps with part of the problem. Something the team can try, not only review.</p>
+          </div>
+          <div class="process-step reveal-item">
+            <span class="text-4xl font-serif text-accent/40 mb-4 block">04</span>
+            <h3 class="text-lg font-medium mb-2">Refine & hand over</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">We adjust based on how the team actually uses it, then leave notes and ownership so it can keep growing without us.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-28 relative border-t border-ink-700/60">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16 max-w-2xl">
+          <p class="text-accent text-sm tracking-[0.2em] uppercase mb-4">Services</p>
+          <h2 class="font-serif text-4xl sm:text-5xl tracking-tight mb-5">What we offer</h2>
+          <p class="text-sand-100/80 text-lg leading-relaxed">
+            The core work is custom software for professional teams. Around that we also design and build the digital products, sites, and growth systems that support the same standard of care.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">Custom software & internal tools</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Focused applications built around real workflows — dashboards, operational systems, decision tools, and the quiet software that keeps a team moving.</p>
+          </div>
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">Machine learning systems</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">From prediction models to scoring engines and collaborative training platforms. Practical ML that sits inside the work, not beside it.</p>
+          </div>
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">Web applications & platforms</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Modern web products with clean interfaces, solid architecture, and the performance expected when people depend on them daily.</p>
+          </div>
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">E-commerce & digital products</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Storefronts and product experiences designed to convert and to last — without the template feel of most off-the-shelf solutions.</p>
+          </div>
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">SEO & growth systems</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Technical and content foundations that help the right people find the work. Measured, not magical.</p>
+          </div>
+          <div class="service-card reveal-item">
+            <h3 class="font-medium text-lg mb-2">Workshops & instruction</h3>
+            <p class="text-sand-100/70 text-sm leading-relaxed">Hands-on sessions for teams who want to get sharper with AI and software engineering — practical, not theoretical.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-28 relative border-t border-ink-700/60">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <p class="text-accent text-sm tracking-[0.2em] uppercase mb-4">Start here</p>
+        <h2 class="font-serif text-4xl sm:text-5xl tracking-tight mb-6">Book a free 30-minute discovery call</h2>
+        <p class="text-sand-100/80 text-lg leading-relaxed mb-12 max-w-xl mx-auto">
+          No pitch deck. No obligation. Just a clear conversation about the problem you are trying to solve and whether there is a useful first step we can take together.
+        </p>
+
+        <form id="contactForm" class="text-left space-y-5 max-w-md mx-auto">
+          <div>
+            <label for="name" class="block text-sm text-sand-200/70 mb-1.5">Name</label>
+            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm text-sand-200/70 mb-1.5">Email</label>
+            <input type="email" id="email" name="email" required class="form-input" placeholder="you@company.com" />
+          </div>
+          <div>
+            <label for="company" class="block text-sm text-sand-200/70 mb-1.5">Company / Team</label>
+            <input type="text" id="company" name="company" class="form-input" placeholder="Optional" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm text-sand-200/70 mb-1.5">What are you trying to solve?</label>
+            <textarea id="message" name="message" rows="4" class="form-input resize-none" placeholder="A short note is enough."></textarea>
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-full bg-accent text-ink-950 font-medium hover:bg-accent-soft transition-colors">
+            Request a discovery call
+          </button>
+          <p class="text-center text-xs text-sand-200/40 pt-2">We’ll reply within one business day.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-ink-700/60 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7">
+          <svg viewBox="0 0 40 40" fill="none" class="w-full h-full text-accent">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+            <circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="text-sm text-sand-200/60">Ayin Studio · Something from nothing</span>
+      </div>
+      <p class="text-sm text-sand-200/40">© 2026 Ayin Studio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
